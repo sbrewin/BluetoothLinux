@@ -7,13 +7,14 @@
 //
 
 #if os(Linux)
-    import Glibc
-#elseif os(macOS) || os(iOS)
-    import Darwin.C
+import Glibc
+#elseif canImport(Darwin)
+import Darwin.C
 #endif
 
 import Foundation
 import Bluetooth
+//import BluetoothHCI
 import CSwiftBluetoothLinux
 
 /// L2CAP Bluetooth socket
