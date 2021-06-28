@@ -121,11 +121,15 @@ public final class L2CAPSocket: L2CAPSocketProtocol {
         }
         
         //. socket domain and protocol
+        // Temporary hack. Works as Darwin support isn't used
+        #if os(Linux)
         guard try value(for: SO_DOMAIN) == AF_BLUETOOTH,
             try value(for: SO_PROTOCOL) == BluetoothProtocol.l2cap.rawValue
             else { return false }
-        
         return true
+        #else
+        return false
+        #endif
     }
     
     /// Create the underlying socket for the L2CAP.
